@@ -5,13 +5,15 @@ import { Button, Divider, Layout } from '@ui-kitten/components'
 import { useNavigation } from '@react-navigation/native'
 
 import { ThemeContext } from '@/contexts/theme.context'
-import { AppTopNavigation } from '@/components'
+import { AppTopNavigation, ExpenseList, Loader } from '@/components'
+import { useGetExpenses } from '@/hooks/use-queries'
 
 // main
 const HomeScreen = () => {
     // refs
     const themeContext = React.useContext(ThemeContext)
     const navigation = useNavigation()
+    const [expenses, expensesloading, expensesRefresh] = useGetExpenses()
 
     // methods
     const navigateDetails = () => {
@@ -23,9 +25,14 @@ const HomeScreen = () => {
         <SafeAreaView style={{ flex: 1 }}>
             <AppTopNavigation />
             <Divider />
-            <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Button onPress={navigateDetails}>OPEN DETAILS</Button>
-                <Button onPress={themeContext.toggleTheme}>CHANGE THEME</Button>
+            <Layout>
+                {/* <Button onPress={navigateDetails}>OPEN DETAILS</Button>
+                <Button onPress={themeContext.toggleTheme}>CHANGE THEME</Button> */}
+                {!expensesloading ? (
+                    <ExpenseList data={expenses} refresh={expensesRefresh} />
+                ) : (
+                    <Loader />
+                )}
             </Layout>
         </SafeAreaView>
     )

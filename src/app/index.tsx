@@ -1,3 +1,6 @@
+import 'intl'
+import 'intl/locale-data/jsonp/en'
+
 import React from 'react'
 import { useColorScheme } from 'react-native'
 import { dark, light, mapping } from '@eva-design/eva'
