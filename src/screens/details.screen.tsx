@@ -1,7 +1,8 @@
 import React from 'react'
 import { SafeAreaView } from 'react-native'
 import { Divider, Layout, Text } from '@ui-kitten/components'
-import { AppTopNavigation } from '../components'
+
+import { AppTopNavigation } from '@/components'
 
 const DetailsScreen = () => {
     return (

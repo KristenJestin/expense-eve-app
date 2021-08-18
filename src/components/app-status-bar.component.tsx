@@ -3,7 +3,7 @@ import React from 'react'
 import { StatusBar } from 'react-native'
 import { useTheme } from '@ui-kitten/components'
 
-import { ThemeContext } from '../contexts/theme.context'
+import { ThemeContext } from '@/contexts/theme.context'
 
 // main
 const AppStatusBar = () => {

@@ -4,8 +4,8 @@ import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { useTheme } from '@ui-kitten/components'
 
-import { HomeScreen, DetailsScreen } from '../screens'
-import { AppStatusBar } from '../components'
+import { HomeScreen, DetailsScreen } from '@/screens'
+import { AppStatusBar } from '@/components'
 
 // config
 const { Navigator, Screen } = createStackNavigator()

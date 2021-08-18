@@ -4,8 +4,8 @@ import { SafeAreaView } from 'react-native'
 import { Button, Divider, Layout } from '@ui-kitten/components'
 import { useNavigation } from '@react-navigation/native'
 
-import { AppTopNavigation } from '../components'
-import { ThemeContext } from '../contexts/theme.context'
+import { ThemeContext } from '@/contexts/theme.context'
+import { AppTopNavigation } from '@/components'
 
 // main
 const HomeScreen = () => {

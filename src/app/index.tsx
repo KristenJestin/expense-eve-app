@@ -5,8 +5,8 @@ import { ApplicationProvider, IconRegistry } from '@ui-kitten/components'
 import { EvaIconsPack } from '@ui-kitten/eva-icons'
 
 import { default as appTheme } from './theme.json'
-import { ThemeContext } from '../contexts/theme.context'
-import { AppNavigator } from '../navigation'
+import { ThemeContext } from '@/contexts/theme.context'
+import { AppNavigator } from '@/navigation'
 
 export default () => {
     // refs
