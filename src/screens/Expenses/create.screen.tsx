@@ -1,14 +1,31 @@
+// imports
 import React from 'react'
-import { Text } from '@ui-kitten/components'
+import { StackScreenProps } from '@react-navigation/stack'
+import { Text, Input } from '@ui-kitten/components'
 
+import { RootStackParamList } from '@/navigation/home.navigator'
 import { Container } from '@/components'
 
-const DetailsScreen = () => {
+// props
+type Props = StackScreenProps<RootStackParamList, 'ExpenseCreate'>
+
+// main
+const CreateScreen: React.FC<Props> = () => {
+    // refs
+    const [value, setValue] = React.useState('')
+
+    // render
     return (
         <Container>
             <Text category="h2">CREATE</Text>
+            <Input
+                placeholder="Title"
+                value={value}
+                onChangeText={(nextValue) => setValue(nextValue)}
+            />
         </Container>
     )
 }
 
-export default DetailsScreen
+// exports
+export default CreateScreen

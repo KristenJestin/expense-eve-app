@@ -4,12 +4,12 @@ import { View } from 'react-native'
 import {
     StyleService,
     useStyleSheet,
-    Button,
     Icon,
     List,
     ListItem,
     IconProps,
     Text,
+    Divider,
 } from '@ui-kitten/components'
 import { DateTime } from 'luxon'
 
@@ -22,10 +22,17 @@ interface ExpenseListProps {
     loading: boolean
     refresh?: () => Promise<void>
     next?: () => Promise<void>
+    onPress?: (item: ExpenseModel) => void
 }
 
 // main
-export const ExpenseList: React.FC<ExpenseListProps> = ({ data, loading, refresh, next }) => {
+export const ExpenseList: React.FC<ExpenseListProps> = ({
+    data,
+    loading,
+    refresh,
+    next,
+    onPress,
+}) => {
     // refs
     const [refreshing, setRefreshing] = useState(false)
     const styles = useStyleSheet(themedStyles)
@@ -41,9 +48,7 @@ export const ExpenseList: React.FC<ExpenseListProps> = ({ data, loading, refresh
         if (next) await next()
     }
 
-    // renders
-    const renderItemAccessory = () => <Button size="tiny">DETAILS</Button>
-
+    // components
     const renderItemIcon = (props: IconProps) => <Icon {...props} name="person" />
 
     const renderDescription = (item: ExpenseModel) => (
@@ -64,7 +69,7 @@ export const ExpenseList: React.FC<ExpenseListProps> = ({ data, loading, refresh
             title={item.title}
             description={renderDescription(item)}
             accessoryLeft={renderItemIcon}
-            accessoryRight={renderItemAccessory}
+            onPress={() => onPress && onPress(item)}
         />
     )
 
@@ -86,6 +91,7 @@ export const ExpenseList: React.FC<ExpenseListProps> = ({ data, loading, refresh
             onEndReached={handleNextPage}
             onEndReachedThreshold={0.2}
             ListFooterComponent={renderFooter}
+            ItemSeparatorComponent={Divider}
         />
     )
 }

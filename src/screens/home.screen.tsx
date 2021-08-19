@@ -5,6 +5,7 @@ import { StackScreenProps } from '@react-navigation/stack'
 import { RootStackParamList } from '@/navigation/home.navigator'
 import { useGetExpenses } from '@/hooks/use-queries'
 import { ExpenseList, Container, FloatingActionButton } from '@/components'
+import ExpenseModel from '@/api/models/expense.model'
 
 // props
 type Props = StackScreenProps<RootStackParamList, 'Home'>
@@ -19,6 +20,11 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
         next: expensesNext,
     } = useGetExpenses()
 
+    // methods
+    const itemPressed = (item: ExpenseModel) => {
+        navigation.navigate('ExpenseDetails', { id: item.id })
+    }
+
     // render
     return (
         <Container>
@@ -27,6 +33,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                 loading={expensesLoading}
                 refresh={expensesRefresh}
                 next={expensesNext}
+                onPress={itemPressed}
             />
             <FloatingActionButton onPress={() => navigation.navigate('ExpenseCreate')} />
         </Container>

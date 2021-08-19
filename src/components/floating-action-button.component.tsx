@@ -19,7 +19,7 @@ const FloatingActionButton: React.FC<Props> = ({ onPress }) => {
     // render
     return (
         <TouchableOpacity activeOpacity={0.7} onPress={onPress} style={styles.container}>
-            <PlusIcon style={styles.icon} fill={theme['text-basic-color']} />
+            <PlusIcon style={styles.icon} fill={theme['text-control-color']} />
         </TouchableOpacity>
     )
 }
@@ -38,8 +38,8 @@ const themedStyles = StyleService.create({
         borderRadius: 200 / 2,
     },
     icon: {
-        width: 32,
-        height: 32,
+        width: 30,
+        height: 30,
     },
 })
 
