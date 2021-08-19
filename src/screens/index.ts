@@ -1,2 +1,4 @@
 export { default as HomeScreen } from './home.screen'
-export { default as DetailsScreen } from './details.screen'
+
+export { default as ExpenseCreateScreen } from './Expenses/create.screen'
+export { default as ExpenseDetailsScreen } from './Expenses/details.screen'

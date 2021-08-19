@@ -1,21 +1,34 @@
 // imports
 import React, { useState } from 'react'
-import { StyleSheet, View } from 'react-native'
-import { Button, Icon, List, ListItem, IconProps, Text } from '@ui-kitten/components'
+import { View } from 'react-native'
+import {
+    StyleService,
+    useStyleSheet,
+    Button,
+    Icon,
+    List,
+    ListItem,
+    IconProps,
+    Text,
+} from '@ui-kitten/components'
 import { DateTime } from 'luxon'
 
 import ExpenseModel from '@/api/models/expense.model'
+import Loader from './loader.component'
 
 // props
 interface ExpenseListProps {
     data: ExpenseModel[]
+    loading: boolean
     refresh?: () => Promise<void>
+    next?: () => Promise<void>
 }
 
 // main
-export const ExpenseList: React.FC<ExpenseListProps> = ({ data, refresh }) => {
+export const ExpenseList: React.FC<ExpenseListProps> = ({ data, loading, refresh, next }) => {
     // refs
     const [refreshing, setRefreshing] = useState(false)
+    const styles = useStyleSheet(themedStyles)
 
     // methods
     const handleRefreshing = async () => {
@@ -25,7 +38,7 @@ export const ExpenseList: React.FC<ExpenseListProps> = ({ data, refresh }) => {
     }
 
     const handleNextPage = async () => {
-        console.log('end page')
+        if (next) await next()
     }
 
     // renders
@@ -55,6 +68,13 @@ export const ExpenseList: React.FC<ExpenseListProps> = ({ data, refresh }) => {
         />
     )
 
+    const renderFooter = () =>
+        loading ? (
+            <View style={styles.loading}>
+                <Loader />
+            </View>
+        ) : null
+
     // render
     return (
         <List
@@ -64,14 +84,16 @@ export const ExpenseList: React.FC<ExpenseListProps> = ({ data, refresh }) => {
             refreshing={refreshing}
             onRefresh={handleRefreshing}
             onEndReached={handleNextPage}
-            onEndReachedThreshold={0.25}
+            onEndReachedThreshold={0.2}
+            ListFooterComponent={renderFooter}
         />
     )
 }
 
-const styles = StyleSheet.create({
+const themedStyles = StyleService.create({
     container: {
         // maxHeight: 192,
+        backgroundColor: 'background-basic-color-1',
     },
     description: {
         flex: 1,
@@ -80,6 +102,9 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         paddingHorizontal: 8,
+    },
+    loading: {
+        marginVertical: 15,
     },
 })
 

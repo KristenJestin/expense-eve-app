@@ -6,12 +6,12 @@ import { useNavigation } from '@react-navigation/native'
 import { BackIcon } from './icons'
 
 // props
-interface AppTopNavigationProps {
+type Props = {
     title?: string
 }
 
 // main
-const AppTopNavigation: React.FC<AppTopNavigationProps> = ({ title }) => {
+const AppTopNavigation: React.FC<Props> = ({ title }) => {
     // refs
     const navigation = useNavigation()
 

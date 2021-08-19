@@ -6,7 +6,7 @@ import { useTheme } from '@ui-kitten/components'
 import { ThemeContext } from '@/contexts/theme.context'
 
 // main
-const AppStatusBar = () => {
+const AppStatusBar = (): React.ReactElement => {
     // refs
     const themeContext = React.useContext(ThemeContext)
     const uiTheme = useTheme()

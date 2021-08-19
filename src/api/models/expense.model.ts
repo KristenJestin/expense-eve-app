@@ -1,4 +1,5 @@
-export default interface Expense {
+// main
+interface Expense {
     id: string
     user_id: string
     title: string
@@ -8,3 +9,6 @@ export default interface Expense {
     created_at: string
     updated_at: string
 }
+
+// exports
+export default Expense

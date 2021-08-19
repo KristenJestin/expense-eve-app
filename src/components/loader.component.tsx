@@ -12,7 +12,6 @@ export const Loader = (): React.ReactElement => (
 
 const styles = StyleSheet.create({
     container: {
-        height: '80%',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',

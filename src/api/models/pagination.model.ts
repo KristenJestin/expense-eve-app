@@ -1,5 +1,5 @@
 // main
-export interface Meta {
+interface Meta {
     total: number
     per_page: number
     current_page: number
@@ -11,7 +11,11 @@ export interface Meta {
     previous_page_url: string
 }
 
-export default interface Pagination<T> {
+interface Pagination<T> {
     meta: Meta
     data: T[]
 }
+
+// exports
+export default Pagination
+export type { Meta }
