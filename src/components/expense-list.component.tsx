@@ -16,7 +16,7 @@ import { DateTime } from 'luxon'
 import ExpenseModel from '@/api/models/expense.model'
 import { Loader } from '.'
 import { ForwardIcon } from './icons'
-import { groupBy } from '../utils/array'
+import { groupBy } from '@/utils/array'
 
 // props
 interface ExpenseListProps {

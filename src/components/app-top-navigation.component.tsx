@@ -70,7 +70,7 @@ const AppTopNavigation: React.FC<Props> = ({ title }) => {
     return (
         <TopNavigation
             alignment="center"
-            title={title || 'MyApp'}
+            title={title || 'ExpenseEve'}
             accessoryLeft={renderBackAction}
             accessoryRight={renderRightActions}
             style={styles.bar}
