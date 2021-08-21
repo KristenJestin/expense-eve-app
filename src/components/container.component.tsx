@@ -1,7 +1,7 @@
 // imports
 import React from 'react'
-import { SafeAreaView, StyleSheet } from 'react-native'
-import { Divider, Layout } from '@ui-kitten/components'
+import { SafeAreaView } from 'react-native'
+import { Divider, Layout, StyleService, useStyleSheet } from '@ui-kitten/components'
 
 import { AppTopNavigation } from '@/components'
 
@@ -12,17 +12,24 @@ type Props = {
 }
 
 // main
-const Container: React.FC<Props> = ({ title, children }) => (
-    <SafeAreaView style={styles.container}>
-        <AppTopNavigation title={title} />
-        <Divider />
-        <Layout style={styles.container}>{children}</Layout>
-    </SafeAreaView>
-)
+const Container: React.FC<Props> = ({ title, children }) => {
+    // refs
+    const styles = useStyleSheet(themedStyles)
 
-const styles = StyleSheet.create({
+    // render
+    return (
+        <SafeAreaView style={styles.container}>
+            <AppTopNavigation title={title} />
+            <Divider />
+            <Layout style={styles.container}>{children}</Layout>
+        </SafeAreaView>
+    )
+}
+
+const themedStyles = StyleService.create({
     container: {
         flex: 1,
+        // backgroundColor: 'background-basic-color-2',
     },
 })
 

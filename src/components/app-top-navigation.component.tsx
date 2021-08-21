@@ -1,6 +1,13 @@
 // imports
 import React from 'react'
-import { MenuItem, OverflowMenu, TopNavigation, TopNavigationAction } from '@ui-kitten/components'
+import {
+    MenuItem,
+    OverflowMenu,
+    StyleService,
+    TopNavigation,
+    TopNavigationAction,
+    useStyleSheet,
+} from '@ui-kitten/components'
 import { useNavigation } from '@react-navigation/native'
 
 import { ThemeContext } from '@/contexts/theme.context'
@@ -14,6 +21,7 @@ type Props = {
 // main
 const AppTopNavigation: React.FC<Props> = ({ title }) => {
     // refs
+    const styles = useStyleSheet(themedStyles)
     const navigation = useNavigation()
     const themeContext = React.useContext(ThemeContext)
     const [menuVisible, setMenuVisible] = React.useState(false)
@@ -65,8 +73,15 @@ const AppTopNavigation: React.FC<Props> = ({ title }) => {
             title={title || 'MyApp'}
             accessoryLeft={renderBackAction}
             accessoryRight={renderRightActions}
+            style={styles.bar}
         />
     )
 }
+
+const themedStyles = StyleService.create({
+    bar: {
+        backgroundColor: 'background-basic-color-2',
+    },
+})
 
 export default AppTopNavigation

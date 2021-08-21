@@ -1,6 +1,7 @@
 // imports
 import React from 'react'
-import { Icon, IconProps } from '@ui-kitten/components'
+import { View } from 'react-native'
+import { Icon, IconProps, Spinner } from '@ui-kitten/components'
 
 // main
 export const BackIcon = (props: IconProps): React.ReactElement => (
@@ -23,4 +24,19 @@ export const InfoIcon = (props: IconProps): React.ReactElement => <Icon {...prop
 
 export const LogoutIcon = (props: IconProps): React.ReactElement => (
     <Icon {...props} name="log-out" />
+)
+
+export const CalendarIcon = (props: IconProps): React.ReactElement => (
+    <Icon {...props} name="calendar" />
+)
+
+export const LoadingIndicator = () => (
+    <View
+        style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+        }}
+    >
+        <Spinner size="small" status="basic" />
+    </View>
 )

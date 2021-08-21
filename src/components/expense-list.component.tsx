@@ -1,5 +1,5 @@
 // imports
-import React, { useState } from 'react'
+import React, { useRef } from 'react'
 import { View } from 'react-native'
 import {
     StyleService,
@@ -10,6 +10,7 @@ import {
     IconProps,
     Text,
     Divider,
+    Layout,
 } from '@ui-kitten/components'
 import { DateTime } from 'luxon'
 
@@ -21,6 +22,7 @@ interface ExpenseListProps {
     data: ExpenseModel[]
     loading: boolean
     refresh?: () => Promise<void>
+    refreshing: boolean
     next?: () => Promise<void>
     onPress?: (item: ExpenseModel) => void
 }
@@ -30,18 +32,21 @@ export const ExpenseList: React.FC<ExpenseListProps> = ({
     data,
     loading,
     refresh,
+    refreshing,
     next,
     onPress,
 }) => {
     // refs
-    const [refreshing, setRefreshing] = useState(false)
     const styles = useStyleSheet(themedStyles)
+    const onEndReachedCalledDuringMomentum = useRef(true)
 
     // methods
     const handleRefreshing = async () => {
-        setRefreshing(true)
-        if (refresh) await refresh()
-        setRefreshing(false)
+        if (!onEndReachedCalledDuringMomentum.current) {
+            if (refresh) await refresh()
+
+            onEndReachedCalledDuringMomentum.current = true
+        }
     }
 
     const handleNextPage = async () => {
@@ -75,9 +80,9 @@ export const ExpenseList: React.FC<ExpenseListProps> = ({
 
     const renderFooter = () =>
         loading ? (
-            <View style={styles.loading}>
+            <Layout style={styles.loading}>
                 <Loader />
-            </View>
+            </Layout>
         ) : null
 
     // render
@@ -85,13 +90,15 @@ export const ExpenseList: React.FC<ExpenseListProps> = ({
         <List
             style={styles.container}
             data={data}
+            keyExtractor={(item) => item.id}
             renderItem={renderItem}
             refreshing={refreshing}
             onRefresh={handleRefreshing}
-            onEndReached={handleNextPage}
-            onEndReachedThreshold={0.2}
             ListFooterComponent={renderFooter}
             ItemSeparatorComponent={Divider}
+            onEndReached={handleNextPage}
+            onEndReachedThreshold={0.2}
+            onMomentumScrollBegin={() => (onEndReachedCalledDuringMomentum.current = false)}
         />
     )
 }
@@ -99,7 +106,6 @@ export const ExpenseList: React.FC<ExpenseListProps> = ({
 const themedStyles = StyleService.create({
     container: {
         // maxHeight: 192,
-        backgroundColor: 'background-basic-color-1',
     },
     description: {
         flex: 1,

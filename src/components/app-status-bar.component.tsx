@@ -14,7 +14,7 @@ const AppStatusBar = (): React.ReactElement => {
     const barStyle = themeContext.theme === 'dark' ? 'light-content' : 'dark-content'
 
     // render
-    return <StatusBar backgroundColor={uiTheme['background-basic-color-2']} barStyle={barStyle} />
+    return <StatusBar backgroundColor={uiTheme['background-basic-color-3']} barStyle={barStyle} />
 }
 
 export default AppStatusBar
