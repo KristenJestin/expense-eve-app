@@ -40,3 +40,5 @@ export const LoadingIndicator = () => (
         <Spinner size="small" status="basic" />
     </View>
 )
+
+export const ForwardIcon = (props: IconProps) => <Icon {...props} name="chevron-right" />

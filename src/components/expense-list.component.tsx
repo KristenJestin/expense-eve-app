@@ -1,11 +1,10 @@
 // imports
 import React, { useRef } from 'react'
-import { View } from 'react-native'
+import { SectionList, SectionListData, View } from 'react-native'
 import {
     StyleService,
     useStyleSheet,
     Icon,
-    List,
     ListItem,
     IconProps,
     Text,
@@ -15,7 +14,9 @@ import {
 import { DateTime } from 'luxon'
 
 import ExpenseModel from '@/api/models/expense.model'
-import Loader from './loader.component'
+import { Loader } from '.'
+import { ForwardIcon } from './icons'
+import { groupBy } from '../utils/array'
 
 // props
 interface ExpenseListProps {
@@ -74,8 +75,21 @@ export const ExpenseList: React.FC<ExpenseListProps> = ({
             title={item.title}
             description={renderDescription(item)}
             accessoryLeft={renderItemIcon}
+            accessoryRight={ForwardIcon}
             onPress={() => onPress && onPress(item)}
         />
+    )
+
+    const renderSectionHeader = ({
+        section: { title },
+    }: {
+        section: SectionListData<ExpenseModel, { title: string; data: ExpenseModel[] }>
+    }) => (
+        <Layout level="3">
+            <Text category="p2" appearance="hint" style={styles.section}>
+                {title}
+            </Text>
+        </Layout>
     )
 
     const renderFooter = () =>
@@ -87,10 +101,16 @@ export const ExpenseList: React.FC<ExpenseListProps> = ({
 
     // render
     return (
-        <List
+        <SectionList
             style={styles.container}
-            data={data}
-            keyExtractor={(item) => item.id}
+            sections={Object.entries(groupBy(data, (d) => DateTime.fromISO(d.at).toISODate())).map(
+                ([key, items]) => ({
+                    title: key,
+                    data: items,
+                })
+            )}
+            keyExtractor={({ id }) => id}
+            renderSectionHeader={renderSectionHeader}
             renderItem={renderItem}
             refreshing={refreshing}
             onRefresh={handleRefreshing}
@@ -117,6 +137,10 @@ const themedStyles = StyleService.create({
     },
     loading: {
         marginVertical: 15,
+    },
+    section: {
+        paddingVertical: 4,
+        paddingHorizontal: 15,
     },
 })
 
