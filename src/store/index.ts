@@ -4,6 +4,7 @@ import { persistStore, persistReducer } from 'redux-persist'
 import { encryptTransform } from 'redux-persist-transform-encrypt'
 import thunk from 'redux-thunk'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import BuildConfig from 'react-native-config'
 
 import { reducers, actions } from './modules'
 
@@ -14,8 +15,7 @@ const persistConfig = {
     timeout: 20000,
     transforms: [
         encryptTransform({
-            // TODO: use env variable
-            secretKey: 'my-super-secret-key',
+            secretKey: BuildConfig.PERSIST_KEY,
         }),
     ],
 }

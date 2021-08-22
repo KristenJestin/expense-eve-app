@@ -43,15 +43,15 @@ export const ExpenseList: React.FC<ExpenseListProps> = ({
 
     // methods
     const handleRefreshing = async () => {
-        if (!onEndReachedCalledDuringMomentum.current) {
-            if (refresh) await refresh()
-
-            onEndReachedCalledDuringMomentum.current = true
-        }
+        if (refresh) await refresh()
     }
 
     const handleNextPage = async () => {
-        if (next) await next()
+        if (!onEndReachedCalledDuringMomentum.current) {
+            if (next) await next()
+
+            onEndReachedCalledDuringMomentum.current = true
+        }
     }
 
     // components

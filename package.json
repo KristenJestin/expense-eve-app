@@ -8,7 +8,8 @@
         "start": "react-native start",
         "test": "jest",
         "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-        "format": "prettier --write ."
+        "format": "prettier --write .",
+        "generate-env-types": "node scripts/generateEnvTypes.js && prettier --write typings/env.d.ts"
     },
     "dependencies": {
         "@eva-design/eva": "^2.1.1",
@@ -24,6 +25,7 @@
         "react": "17.0.2",
         "react-hook-form": "^7.12.2",
         "react-native": "0.65.1",
+        "react-native-config": "^1.4.3",
         "react-native-gesture-handler": "^1.10.3",
         "react-native-safe-area-context": "^3.3.0",
         "react-native-svg": "^12.1.1",

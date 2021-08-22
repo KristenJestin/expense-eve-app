@@ -1,4 +1,5 @@
 // imports
+import BuildConfig from 'react-native-config'
 import axios from 'axios'
 
 import { logout as logoutDispatch } from '@/store/modules/auth/actions'
@@ -8,7 +9,7 @@ import { logout as logoutDispatch } from '@/store/modules/auth/actions'
 
 // main
 const client = axios.create({
-    baseURL: 'http://192.168.0.100:3333',
+    baseURL: BuildConfig.BASE_URL,
     headers: {
         'Content-Type': 'application/json',
     },
