@@ -1,14 +1,19 @@
 // imports
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
 import { useTheme } from '@ui-kitten/components'
 
 import { AppStatusBar } from '@/components'
 import HomeNavigator from './home.navigator'
+import LoginNavigator from './auth.navigator'
+import { RootStates } from '@/store'
+import { AuthState } from '@/store/modules/auth'
 
 const AppNavigator = () => {
     // refs
     const uiTheme = useTheme()
+    const auth = useSelector<RootStates, AuthState>((state) => state.auth)
 
     // data
     const navigationTheme = {
@@ -25,7 +30,7 @@ const AppNavigator = () => {
         <>
             <AppStatusBar />
             <NavigationContainer theme={navigationTheme}>
-                <HomeNavigator />
+                {auth.loggedIn ? <HomeNavigator /> : <LoginNavigator />}
             </NavigationContainer>
         </>
     )

@@ -4,7 +4,7 @@ import { useFocusEffect } from '@react-navigation/native'
 import { StackScreenProps } from '@react-navigation/stack'
 
 import { RootStackParamList } from '@/navigation/home.navigator'
-import { useGetExpenses } from '@/hooks/use-queries'
+import { useGetExpenses } from '@/hooks/use-expense-queries.hook'
 import { ExpenseList, Container, FloatingActionButton } from '@/components'
 import ExpenseModel from '@/api/models/expense.model'
 

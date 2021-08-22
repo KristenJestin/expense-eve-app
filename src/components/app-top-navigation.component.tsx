@@ -10,7 +10,7 @@ import {
 } from '@ui-kitten/components'
 import { useNavigation } from '@react-navigation/native'
 
-import { ThemeContext } from '@/contexts/theme.context'
+import { ThemeContext } from '@/hooks/contexts/theme.context'
 import { BackIcon, InfoIcon, LogoutIcon, MenuIcon, ThemeIcon } from './icons'
 
 // props

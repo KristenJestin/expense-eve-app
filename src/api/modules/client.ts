@@ -1,6 +1,8 @@
 // imports
 import axios from 'axios'
 
+import { logout as logoutDispatch } from '@/store/modules/auth/actions'
+
 // TODO: use env variables
 // import { API_URL } from '@env'
 
@@ -8,16 +10,37 @@ import axios from 'axios'
 const client = axios.create({
     baseURL: 'http://192.168.0.100:3333',
     headers: {
-        Authorization: 'Bearer NA.Uilrcp9s-VFqXwmXZUFfLhWnOoHcIdqNXYxXc6iT8-A6QlCcj9DKRZGr3eTk',
+        'Content-Type': 'application/json',
     },
 })
-// client.interceptors.request.use((config) => {
-//     config.paramsSerializer = (params) =>
-//         qs.stringify(params, {
-//             serializeDate: (date: Date) => DateTime.fromJSDate(date).toISO(),
-//         })
-//     return config
-// })
+
+const setupInterceptors = (store: any) => {
+    // TODO: use type for store var
+    client.interceptors.request.use(
+        (config) => {
+            const { token } = store.getState().auth
+            if (token) {
+                config.headers.Authorization = `Bearer ${token}`
+            }
+            return config
+        },
+        (error) => Promise.reject(error)
+    )
+
+    client.interceptors.response.use(
+        (res) => res,
+        async (error) => {
+            const { response } = error
+
+            if (response.status === 401) {
+                store.dispatch(logoutDispatch({}))
+            }
+
+            return Promise.reject(error)
+        }
+    )
+}
 
 // exports
 export default client
+export { setupInterceptors }

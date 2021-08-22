@@ -6,14 +6,14 @@ import ExpenseModel, { CreateInputs } from '@/api/models/expense.model'
 import Pagination from '@/api/models/pagination.model'
 
 // data
-const EXPENSES_SEGMENT = '/expenses'
+const SEGMENT = '/expenses'
 
 // main
 const all = async (page?: number): Promise<Pagination<ExpenseModel>> =>
-    await get<Pagination<ExpenseModel>>(EXPENSES_SEGMENT, { page: page || 1 })
+    await get<Pagination<ExpenseModel>>(SEGMENT, { page: page || 1 })
 
 const find = async (id: string): Promise<ExpenseModel> =>
-    await get<ExpenseModel>(`${EXPENSES_SEGMENT}/${id}`)
+    await get<ExpenseModel>(`${SEGMENT}/${id}`)
 
 const store = async (inputs: CreateInputs): Promise<ExpenseModel> => {
     const data = {
@@ -21,7 +21,7 @@ const store = async (inputs: CreateInputs): Promise<ExpenseModel> => {
         cost: inputs.cost,
         at: DateTime.fromJSDate(inputs.date).toISO(),
     }
-    return await post<ExpenseModel>(EXPENSES_SEGMENT, data)
+    return await post<ExpenseModel>(SEGMENT, data)
 }
 
 const update = async (id: string, inputs: CreateInputs): Promise<ExpenseModel> => {
@@ -30,11 +30,11 @@ const update = async (id: string, inputs: CreateInputs): Promise<ExpenseModel> =
         cost: inputs.cost,
         at: DateTime.fromJSDate(inputs.date).toISO(),
     }
-    return await patch<ExpenseModel>(`${EXPENSES_SEGMENT}/${id}`, data)
+    return await patch<ExpenseModel>(`${SEGMENT}/${id}`, data)
 }
 
 const destroy = async (id: string): Promise<void> => {
-    await _delete(`${EXPENSES_SEGMENT}/${id}`)
+    await _delete(`${SEGMENT}/${id}`)
 }
 
 // exports

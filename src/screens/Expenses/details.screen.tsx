@@ -8,7 +8,7 @@ import { Button, Card, Layout, Text, Modal } from '@ui-kitten/components'
 
 import { RootStackParamList } from '@/navigation/home.navigator'
 import { Container, DetailsPart, Loader } from '@/components'
-import { useFindExpense, useDeleteExpense } from '@/hooks/use-queries'
+import { useFindExpense, useDeleteExpense } from '@/hooks/use-expense-queries.hook'
 
 // props
 type Props = StackScreenProps<RootStackParamList, 'ExpenseDetails'>

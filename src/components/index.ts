@@ -5,5 +5,6 @@ export { default as Loader } from './loader.component'
 export { default as FloatingActionButton } from './floating-action-button.component'
 export { default as ErrorMessage } from './error-message.component'
 export { default as DetailsPart } from './details-part.component'
+export { default as ErrorBanner } from './error-banner.component'
 
 export { default as ExpenseList } from './expense-list.component'

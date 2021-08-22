@@ -11,7 +11,7 @@ import { RootStackParamList } from '@/navigation/home.navigator'
 import { CreateInputs, createSchema } from '@/api/models/expense.model'
 import { Container, ErrorMessage, Loader } from '@/components'
 import { CalendarIcon, LoadingIndicator } from '@/components/icons'
-import { useFindExpense, useUpdateExpense } from '@/hooks/use-queries'
+import { useFindExpense, useUpdateExpense } from '@/hooks/use-expense-queries.hook'
 
 // props
 type Props = StackScreenProps<RootStackParamList, 'ExpenseEdit'>

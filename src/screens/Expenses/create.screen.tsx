@@ -11,7 +11,7 @@ import { RootStackParamList } from '@/navigation/home.navigator'
 import { CreateInputs, createSchema } from '@/api/models/expense.model'
 import { Container, ErrorMessage } from '@/components'
 import { CalendarIcon, LoadingIndicator } from '@/components/icons'
-import { useStoreExpense } from '@/hooks/use-queries'
+import { useStoreExpense } from '@/hooks/use-expense-queries.hook'
 
 // props
 type Props = StackScreenProps<RootStackParamList, 'ExpenseCreate'>
@@ -44,9 +44,6 @@ const CreateScreen: React.FC<Props> = ({ navigation }) => {
                 <View style={styles.formGroup}>
                     <Controller
                         control={control}
-                        rules={{
-                            required: true,
-                        }}
                         render={({ field: { onChange, onBlur, value } }) => (
                             <Input
                                 label="Title"
@@ -68,9 +65,6 @@ const CreateScreen: React.FC<Props> = ({ navigation }) => {
                 <View style={styles.formGroup}>
                     <Controller
                         control={control}
-                        rules={{
-                            required: true,
-                        }}
                         render={({ field: { onChange, onBlur, value } }) => (
                             <Input
                                 label="Cost"
@@ -92,9 +86,6 @@ const CreateScreen: React.FC<Props> = ({ navigation }) => {
                 <View style={styles.formGroup}>
                     <Controller
                         control={control}
-                        rules={{
-                            required: true,
-                        }}
                         render={({ field: { onChange, onBlur, value } }) => (
                             <Datepicker
                                 label="Date"
