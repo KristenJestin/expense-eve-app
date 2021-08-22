@@ -1,5 +1,7 @@
 // imports
 import React from 'react'
+import { useNavigation } from '@react-navigation/native'
+import { useDispatch } from 'react-redux'
 import {
     MenuItem,
     OverflowMenu,
@@ -8,8 +10,8 @@ import {
     TopNavigationAction,
     useStyleSheet,
 } from '@ui-kitten/components'
-import { useNavigation } from '@react-navigation/native'
 
+import { logout as logoutDispatch } from '@/store/modules/auth/actions'
 import { ThemeContext } from '@/hooks/contexts/theme.context'
 import { BackIcon, InfoIcon, LogoutIcon, MenuIcon, ThemeIcon } from './icons'
 
@@ -25,6 +27,7 @@ const AppTopNavigation: React.FC<Props> = ({ title }) => {
     const navigation = useNavigation()
     const themeContext = React.useContext(ThemeContext)
     const [menuVisible, setMenuVisible] = React.useState(false)
+    const dispatch = useDispatch()
 
     // methods
     const navigateBack = () => {
@@ -61,7 +64,11 @@ const AppTopNavigation: React.FC<Props> = ({ title }) => {
                 onBackdropPress={toggleMenu}
             >
                 <MenuItem accessoryLeft={InfoIcon} title="About" />
-                <MenuItem accessoryLeft={LogoutIcon} title="Logout" />
+                <MenuItem
+                    accessoryLeft={LogoutIcon}
+                    title="Logout"
+                    onPress={() => dispatch(logoutDispatch({}))}
+                />
             </OverflowMenu>
         </React.Fragment>
     )
